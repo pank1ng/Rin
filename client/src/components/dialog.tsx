@@ -61,8 +61,8 @@ export function useAlert() {
                 }
             }}
         >
-            <div className="flex flex-col items-start p-4 bg-w space-y-4 w-full min-w-56 sm:min-w-96">
-                <h1 className="text-2xl font-bold t-primary">
+            <div className="flex flex-col items-start p-6 glass-card space-y-4 w-full min-w-56 sm:min-w-96">
+                <h1 className="text-2xl font-semibold tracking-[-0.03em] t-primary">
                     {t("alert")}
                 </h1>
                 <p className="text-base t-primary">
@@ -123,8 +123,8 @@ export function useConfirm() {
                 }
             }}
         >
-            <div className="flex flex-col items-start p-4 bg-w space-y-4 w-full min-w-56 sm:min-w-96">
-                <h1 className="text-2xl font-bold t-primary">
+            <div className="flex flex-col items-start p-6 glass-card space-y-4 w-full min-w-56 sm:min-w-96">
+                <h1 className="text-2xl font-semibold tracking-[-0.03em] t-primary">
                     {confirm?.title}
                 </h1>
                 <p className="text-base t-primary">

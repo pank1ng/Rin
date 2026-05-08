@@ -59,7 +59,7 @@ export function Markdown({ content }: { content: string }) {
 
   const Content = useMemo(() => (
     <ReactMarkdown
-      className="toc-content dark:text-neutral-300"
+      className="toc-content dark:text-neutral-300 leading-8"
       remarkPlugins={[gfm, remarkMermaid, remarkMath, remarkAlert]}
       children={content}
       rehypePlugins={[rehypeKatex, rehypeRaw]}
@@ -84,7 +84,7 @@ export function Markdown({ content }: { content: string }) {
               onClick={() => {
                 show(src)
               }}
-              className={`mx-auto ${rounded ? "rounded-xl" : ""}`}
+              className={`mx-auto ${rounded ? "rounded-[24px]" : ""}`}
               style={{ zoom: scale }}
             />
           );
@@ -146,7 +146,7 @@ export function Markdown({ content }: { content: string }) {
                 >
                   {String(children).replace(/\n$/, "")}
                 </SyntaxHighlighter>
-                <button className="absolute top-1 right-1 px-2 py-1 bg-w rounded-md text-sm bg-hover select-none invisible group-hover:visible"
+                <button className="absolute top-2 right-2 px-3 py-1.5 bg-w rounded-full text-sm bg-hover select-none invisible group-hover:visible"
                   onClick={() => {
                     navigator.clipboard.writeText(String(children));
                     setCopied(true);
@@ -173,7 +173,7 @@ export function Markdown({ content }: { content: string }) {
         blockquote({ children, ...props }) {
           return (
             <blockquote
-              className="border-l-4 border-gray-300 dark:border-gray-500 pl-4 italic text-gray-500 dark:text-gray-400"
+              className="border-l-4 border-theme/50 pl-5 italic text-slate-500 dark:text-slate-400"
               {...props}
             >
               {children}
@@ -222,7 +222,7 @@ export function Markdown({ content }: { content: string }) {
         a({ children, ...props }) {
           return (
             <a
-              className="text-[#0686c8] dark:text-[#2590f1] hover:underline"
+              className="text-theme hover:underline underline-offset-4"
               {...props}
             >
               {children}
@@ -233,7 +233,7 @@ export function Markdown({ content }: { content: string }) {
           return (
             <h1
               id={children?.toString()}
-              className="text-3xl font-bold mt-4"
+              className="text-3xl md:text-4xl font-semibold tracking-[-0.04em] mt-6"
               {...props}
             >
               {children}
@@ -244,7 +244,7 @@ export function Markdown({ content }: { content: string }) {
           return (
             <h2
               id={children?.toString()}
-              className="text-2xl font-bold mt-4"
+              className="text-2xl md:text-3xl font-semibold tracking-[-0.04em] mt-6"
               {...props}
             >
               {children}
@@ -255,7 +255,7 @@ export function Markdown({ content }: { content: string }) {
           return (
             <h3
               id={children?.toString()}
-              className="text-xl font-bold mt-4"
+              className="text-xl md:text-2xl font-semibold tracking-[-0.03em] mt-5"
               {...props}
             >
               {children}
@@ -266,7 +266,7 @@ export function Markdown({ content }: { content: string }) {
           return (
             <h4
               id={children?.toString()}
-              className="text-lg font-bold mt-4"
+              className="text-lg font-semibold tracking-[-0.03em] mt-5"
               {...props}
             >
               {children}
@@ -277,7 +277,7 @@ export function Markdown({ content }: { content: string }) {
           return (
             <h5
               id={children?.toString()}
-              className="text-base font-bold mt-4"
+              className="text-base font-semibold mt-4"
               {...props}
             >
               {children}
@@ -288,7 +288,7 @@ export function Markdown({ content }: { content: string }) {
           return (
             <h6
               id={children?.toString()}
-              className="text-sm font-bold mt-4"
+              className="text-sm font-semibold mt-4"
               {...props}
             >
               {children}
@@ -297,7 +297,7 @@ export function Markdown({ content }: { content: string }) {
         },
         p({ children, node, ...props }) {
           return (
-            <p className="mt-2 py-1" {...props}>
+            <p className="mt-2 py-1 text-[1.02rem] leading-8" {...props}>
               {children}
             </p>
           );

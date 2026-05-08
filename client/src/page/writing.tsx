@@ -311,16 +311,16 @@ export function WritingPage({ id }: { id?: number }) {
         <meta property="og:type" content="article" />
         <meta property="og:url" content={document.URL} />
       </Helmet>
-      <div className="grid grid-cols-1 md:grid-cols-3 t-primary mt-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 t-primary mt-4 gap-y-4">
         <div className="col-span-2 pb-8">
-          <div className="bg-w rounded-2xl shadow-xl shadow-light p-4">
+          <div className="glass-card p-4 md:p-5">
             {MetaInput({ className: "visible md:hidden mb-8" })}
             <MarkdownEditor content={content} setContent={setContent} height='600px' />
           </div>
           <div className="visible md:hidden flex flex-row justify-center mt-8">
             <button
               onClick={publishButton}
-              className="basis-1/2 bg-theme text-white py-4 rounded-full shadow-xl shadow-light flex flex-row justify-center items-center space-x-2"
+              className="basis-1/2 bg-theme text-white py-4 rounded-full shadow-[0_16px_36px_rgba(10,132,255,0.28)] flex flex-row justify-center items-center space-x-2 bg-button"
             >
               {publishing &&
                 <Loading type="spin" height={16} width={16} />
@@ -332,11 +332,11 @@ export function WritingPage({ id }: { id?: number }) {
           </div>
         </div>
         <div className="hidden md:visible max-w-96 md:flex flex-col">
-          {MetaInput({ className: "bg-w rounded-2xl shadow-xl shadow-light p-4 mx-8" })}
+          {MetaInput({ className: "glass-card p-5 mx-8" })}
           <div className="flex flex-row justify-center mt-8">
             <button
               onClick={publishButton}
-              className="basis-1/2 bg-theme text-white py-4 rounded-full shadow-xl shadow-light flex flex-row justify-center items-center space-x-2"
+              className="basis-1/2 bg-theme text-white py-4 rounded-full shadow-[0_16px_36px_rgba(10,132,255,0.28)] flex flex-row justify-center items-center space-x-2 bg-button"
             >
               {publishing &&
                 <Loading type="spin" height={16} width={16} />

@@ -109,25 +109,27 @@ export function MarkdownEditor({ content, setContent, placeholder = "> Write you
 
   return (
     <div className="flex flex-col mx-4 my-2 md:mx-0 md:my-0 gap-2">
-      <div className="flex flex-row space-x-2">
-        <button className={`${preview === 'edit' ? "text-theme" : ""}`} onClick={() => setPreview('edit')}> {t("edit")} </button>
-        <button className={`${preview === 'preview' ? "text-theme" : ""}`} onClick={() => setPreview('preview')}> {t("preview")} </button>
-        <button className={`${preview === 'comparison' ? "text-theme" : ""}`} onClick={() => setPreview('comparison')}> {t("comparison")} </button>
+      <div className="flex flex-row space-x-2 glass-subtle p-2">
+        <button className={`${preview === 'edit' ? "bg-white/90 dark:bg-slate-800/90 text-theme shadow-light" : "t-secondary"} rounded-full px-4 py-2 text-sm font-medium bg-button`} onClick={() => setPreview('edit')}> {t("edit")} </button>
+        <button className={`${preview === 'preview' ? "bg-white/90 dark:bg-slate-800/90 text-theme shadow-light" : "t-secondary"} rounded-full px-4 py-2 text-sm font-medium bg-button`} onClick={() => setPreview('preview')}> {t("preview")} </button>
+        <button className={`${preview === 'comparison' ? "bg-white/90 dark:bg-slate-800/90 text-theme shadow-light" : "t-secondary"} rounded-full px-4 py-2 text-sm font-medium bg-button`} onClick={() => setPreview('comparison')}> {t("comparison")} </button>
         <div className="flex-grow" />
         {uploading &&
           <div className="flex flex-row space-x-2 items-center">
-            <Loading type="spin" color="#FC466B" height={16} width={16} />
-            <span className="text-sm text-neutral-500">{t('uploading')}</span>
+            <Loading type="spin" color="#0A84FF" height={16} width={16} />
+            <span className="text-sm t-secondary">{t('uploading')}</span>
           </div>
         }
       </div>
       <div className={`grid grid-cols-1 ${preview === 'comparison' ? "sm:grid-cols-2" : ""}`}>
         <div className={"flex flex-col " + (preview === 'preview' ? "hidden" : "")}>
           <div className="flex flex-row justify-start mb-2">
-            <UploadImageButton />
+            <div className="ios-pill text-sm">
+              <UploadImageButton />
+            </div>
           </div>
           <div
-            className={"relative"}
+            className={"relative overflow-hidden rounded-[24px] border border-white/60 dark:border-slate-700/60"}
             onDrop={(e) => {
               e.preventDefault();
               const editor = editorRef.current;
@@ -171,7 +173,7 @@ export function MarkdownEditor({ content, setContent, placeholder = "> Write you
           </div>
         </div>
         <div
-          className={"px-4 overflow-y-scroll " + (preview !== 'edit' ? "" : "hidden")}
+          className={"px-6 py-4 overflow-y-scroll glass-subtle " + (preview !== 'edit' ? "" : "hidden")}
           style={{ height: height }}
         >
           <Markdown content={content ? content : placeholder} />

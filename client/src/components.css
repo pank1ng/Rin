@@ -2,6 +2,6 @@
 
 @layer base {
     .border-card {
-        @apply shadow-lg border dark:border-neutral-600 shadow-deep rounded-xl p-4 bg-w text-sm t-secondary font-normal flex flex-col items-start mt-2 space-y-2
+        @apply glass-card p-5 text-sm t-secondary font-normal flex flex-col items-start mt-2 space-y-3
     }
 }

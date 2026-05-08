@@ -15,7 +15,13 @@
 
 body {
   @apply bg-background-light dark:bg-background-dark text-gray-800;
-  font-family: Cantarell, "Source Han Serif CN VF" !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Cantarell, sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgba(10, 132, 255, 0.18);
+  color: inherit;
 }
 
 textarea:focus {
@@ -32,7 +38,7 @@ textarea:focus {
 }
 
 .wmde-markdown img {
-  @apply rounded-lg;
+  @apply rounded-[22px];
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -51,7 +57,7 @@ ul {
 }
 
 .wmde-markdown code {
-  @apply text-theme bg-secondary;
+  @apply text-theme bg-secondary rounded-xl px-1.5;
 }
 
 .markdown-alert {
@@ -137,11 +143,11 @@ ul {
 
 .table th,
 .table td {
-  @apply border border-slate-500 dark:border-slate-300 px-4 py-2;
+  @apply border border-slate-200/80 dark:border-slate-600/70 px-4 py-2;
 }
 
 .table th {
-  @apply bg-slate-200 dark:bg-slate-700;
+  @apply bg-slate-100/80 dark:bg-slate-800/70;
 }
 
 /* TOC Style */
@@ -191,7 +197,7 @@ a.toc-link {
 }
 
 .toc-link::before {
-  background-color: #eee;
+  background-color: rgba(148, 163, 184, 0.26);
   content: " ";
   display: inline-block;
   height: inherit;
@@ -203,4 +209,18 @@ a.toc-link {
 
 .is-active-link::before {
   @apply bg-theme;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }

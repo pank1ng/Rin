@@ -61,18 +61,21 @@ export function TimelinePage() {
             </Helmet>
             <Waiting for={feeds}>
                 <main className="w-full flex flex-col justify-center items-center mb-8 ani-show">
-                    <div className="wauto text-start text-black dark:text-white py-4 text-4xl font-bold">
-                        <p>
+                    <div className="wauto text-start py-6">
+                        <p className="ios-kicker mb-4">
+                            Archive
+                        </p>
+                        <p className="ios-title">
                             {t('timeline')}
                         </p>
-                        <div className="flex flex-row justify-between">
-                            <p className="text-sm mt-4 text-neutral-500 font-normal">
+                        <div className="flex flex-row justify-between mt-5">
+                            <p className="text-sm t-secondary font-normal">
                                 {t('article.total$count', { count: length })}
                             </p>
                         </div>
                     </div>
                     {feeds && Object.keys(feeds).sort((a, b) => parseInt(b) - parseInt(a)).map(year => (
-                        <div key={year} className="wauto flex flex-col justify-center items-start">
+                        <div key={year} className="wauto flex flex-col justify-center items-start glass-card p-6 md:p-8 mb-4">
                             <h1 className="flex flex-row items-center space-x-2">
                                 <span className="text-2xl font-bold t-primary ">
                                     {t('year$year', { year: year })}
@@ -98,11 +101,11 @@ export function TimelinePage() {
 export function FeedItem({ id, title, createdAt }: { id: string, title: string, createdAt: Date }) {
     const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit' });
     return (
-        <div className="flex flex-row pl-8">
+        <div className="flex flex-row pl-2">
             <div className="flex flex-row items-center">
-                <div className="w-2 h-2 bg-theme rounded-full"></div>
+                <div className="w-2.5 h-2.5 bg-theme rounded-full shadow-[0_0_18px_rgba(10,132,255,0.48)]"></div>
             </div>
-            <div className="flex-1 rounded-2xl m-2 duration-300 flex flex-row items-center space-x-4   ">
+            <div className="flex-1 rounded-[20px] m-2 duration-300 flex flex-row items-center space-x-4 px-4 py-3 bg-secondary bg-button">
                 <span className="t-secondary text-sm" title={new Date(createdAt).toLocaleString()}>
                     {formatter.format(new Date(createdAt))}
                 </span>

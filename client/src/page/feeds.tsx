@@ -77,20 +77,23 @@ export function FeedsPage() {
             </Helmet>
             <Waiting for={feeds.draft.size + feeds.normal.size + feeds.unlisted.size > 0 || status === 'idle'}>
                 <main className="w-full flex flex-col justify-center items-center mb-8">
-                    <div className="wauto text-start text-black dark:text-white py-4 text-4xl font-bold">
-                        <p>
+                    <div className="wauto text-start py-6">
+                        <p className="ios-kicker mb-4">
+                            Rin Journal
+                        </p>
+                        <p className="ios-title">
                             {listState === 'draft' ? t('draft_bin') : listState === 'normal' ? t('article.title') : t('unlisted')}
                         </p>
-                        <div className="flex flex-row justify-between">
-                            <p className="text-sm mt-4 text-neutral-500 font-normal">
+                        <div className="flex flex-row flex-wrap justify-between items-center gap-3 mt-5">
+                            <p className="text-sm t-secondary font-normal">
                                 {t('article.total$count', { count: feeds[listState]?.size })}
                             </p>
                             {profile?.permission &&
-                                <div className="flex flex-row space-x-4">
-                                    <Link href={listState === 'draft' ? '/?type=normal' : '/?type=draft'} className={`text-sm mt-4 text-neutral-500 font-normal ${listState === 'draft' ? "text-theme" : ""}`}>
+                                <div className="flex flex-row flex-wrap gap-3">
+                                    <Link href={listState === 'draft' ? '/?type=normal' : '/?type=draft'} className={`ios-pill text-sm font-normal ${listState === 'draft' ? "bg-theme text-white" : ""}`}>
                                         {t('draft_bin')}
                                     </Link>
-                                    <Link href={listState === 'unlisted' ? '/?type=normal' : '/?type=unlisted'} className={`text-sm mt-4 text-neutral-500 font-normal ${listState === 'unlisted' ? "text-theme" : ""}`}>
+                                    <Link href={listState === 'unlisted' ? '/?type=normal' : '/?type=unlisted'} className={`ios-pill text-sm font-normal ${listState === 'unlisted' ? "bg-theme text-white" : ""}`}>
                                         {t('unlisted')}
                                     </Link>
                                 </div>
@@ -106,14 +109,14 @@ export function FeedsPage() {
                         <div className="wauto flex flex-row items-center mt-4 ani-show">
                             {page > 1 &&
                                 <Link href={`/?type=${listState}&page=${(page - 1)}`}
-                                    className={`text-sm font-normal rounded-full px-4 py-2 text-white bg-theme`}>
+                                    className={`text-sm font-medium rounded-full px-5 py-2.5 text-white bg-theme shadow-[0_16px_36px_rgba(10,132,255,0.28)] bg-button`}>
                                     {t('previous')}
                                 </Link>
                             }
                             <div className="flex-1" />
                             {feeds[listState]?.hasNext &&
                                 <Link href={`/?type=${listState}&page=${(page + 1)}`}
-                                    className={`text-sm font-normal rounded-full px-4 py-2 text-white bg-theme`}>
+                                    className={`text-sm font-medium rounded-full px-5 py-2.5 text-white bg-theme shadow-[0_16px_36px_rgba(10,132,255,0.28)] bg-button`}>
                                     {t('next')}
                                 </Link>
                             }

@@ -19,18 +19,18 @@ export function Header({ children }: { children?: React.ReactNode }) {
 
     return useMemo(() => (
         <>
-            <div className="fixed z-40">
+            <div className="fixed z-40 w-full">
                 <div className="w-screen">
                     <Padding className="mx-4 mt-4">
                         <div className="w-full flex justify-between items-center">
                             <Link aria-label={t('home')} href="/"
-                                className="hidden opacity-0 md:opacity-100 duration-300 mr-auto md:flex flex-row items-center">
-                                <img src={process.env.AVATAR} alt="Avatar" className="w-12 h-12 rounded-2xl border-2" />
+                                className="hidden opacity-0 md:opacity-100 duration-300 mr-auto md:flex flex-row items-center glass-card px-3 py-2">
+                                <img src={process.env.AVATAR} alt="Avatar" className="w-12 h-12 rounded-[20px] object-cover ring-1 ring-white/80" />
                                 <div className="flex flex-col justify-center items-start mx-4">
-                                    <p className="text-xl font-bold dark:text-white">
+                                    <p className="text-lg font-semibold t-primary tracking-[-0.03em]">
                                         {process.env.NAME}
                                     </p>
-                                    <p className="text-xs text-neutral-500">
+                                    <p className="text-xs t-secondary">
                                         {process.env.DESCRIPTION}
                                     </p>
                                 </div>
@@ -38,16 +38,16 @@ export function Header({ children }: { children?: React.ReactNode }) {
                             <div
                                 className="w-full md:w-max transition-all duration-500 md:absolute md:left-1/2 md:translate-x-[-50%] flex-row justify-center items-center">
                                 <div
-                                    className="flex flex-row items-center bg-w t-primary rounded-full px-2 shadow-xl shadow-light">
+                                    className="flex flex-row items-center glass-nav t-primary px-2 py-1">
                                     <Link aria-label={t('home')} href="/"
-                                        className="visible opacity-100 md:hidden md:opacity-0 duration-300 mr-auto flex flex-row items-center py-2">
+                                        className="visible opacity-100 md:hidden md:opacity-0 duration-300 mr-auto flex flex-row items-center py-2 px-2">
                                         <img src={process.env.AVATAR} alt="Avatar"
-                                            className="w-10 h-10 rounded-full border-2" />
+                                            className="w-10 h-10 rounded-[16px] object-cover ring-1 ring-white/80" />
                                         <div className="flex flex-col justify-center items-start mx-2">
-                                            <p className="text-sm font-bold">
+                                            <p className="text-sm font-semibold tracking-[-0.03em]">
                                                 {process.env.NAME}
                                             </p>
-                                            <p className="text-xs text-neutral-500">
+                                            <p className="text-xs t-secondary">
                                                 {process.env.DESCRIPTION}
                                             </p>
                                         </div>
@@ -83,7 +83,7 @@ function NavItem({ menu, title, selected, href, when = true, onClick }: {
         <>
             {when &&
                 <Link href={href}
-                    className={`${menu ? "" : "hidden"} md:block cursor-pointer hover:text-theme duration-300 px-2 py-4 md:p-4 text-sm ${selected ? "text-theme" : "dark:text-white"}`}
+                    className={`${menu ? "" : "hidden"} md:block cursor-pointer duration-300 px-3 py-2.5 md:py-3 text-sm rounded-full ${selected ? "bg-theme text-white shadow-[0_10px_26px_rgba(10,132,255,0.28)]" : "t-primary hover:bg-secondary"}`}
                     state={{ animate: true }}
                     onClick={onClick}
                 >
@@ -122,7 +122,7 @@ function Menu() {
                 closeOnEscape
                 overlayStyle={{ background: "rgba(0,0,0,0.3)" }}
             >
-                <div className="flex flex-col bg-w rounded-xl p-2 mt-4 w-[50vw]">
+                <div className="flex flex-col glass-card p-3 mt-4 w-[72vw] max-w-[22rem]">
                     <div className="flex flex-row justify-end space-x-2">
                         <SearchButton onClose={onClose} />
                         <LanguageSwitch />
@@ -170,7 +170,7 @@ function LanguageSwitch({ className }: { className?: string }) {
         <div className={className + " flex flex-row items-center"}>
             <Popup trigger={
                 <button title={label} aria-label={label}
-                    className="flex rounded-full border dark:border-neutral-600 px-2 bg-w aspect-[1] items-center justify-center t-primary bg-button">
+                    className="ios-icon-button">
                     <i className="ri-translate-2"></i>
                 </button>
             }
@@ -211,7 +211,7 @@ function SearchButton({ className, onClose }: { className?: string, onClose?: ()
     }
     return (<div className={className + " flex flex-row items-center"}>
         <button onClick={() => setIsOpened(true)} title={label} aria-label={label}
-            className="flex rounded-full border dark:border-neutral-600 px-2 bg-w aspect-[1] items-center justify-center t-primary bg-button">
+            className="ios-icon-button">
             <i className="ri-search-line"></i>
         </button>
         <ReactModal
@@ -240,7 +240,7 @@ function SearchButton({ className, onClose }: { className?: string, onClose?: ()
             }}
             onRequestClose={() => setIsOpened(false)}
         >
-            <div className="bg-w w-full flex flex-row items-center justify-between p-4 space-x-4">
+            <div className="glass-card w-full flex flex-row items-center justify-between p-4 space-x-4 min-w-[min(42rem,92vw)]">
                 <Input value={value} setValue={setValue} placeholder={t('article.search.placeholder')}
                     autofocus
                     onSubmit={onSearch} />
@@ -263,7 +263,7 @@ function UserAvatar({ className, profile, onClose }: { className?: string, profi
         <> {config.get<boolean>('login.enabled') && <div className={className + " flex flex-row items-center"}>
             {profile?.avatar ? <>
                 <div className="w-8 relative">
-                    <img src={profile.avatar} alt="Avatar" className="w-8 h-8 rounded-full border" />
+                    <img src={profile.avatar} alt="Avatar" className="w-8 h-8 rounded-full border border-white/70 object-cover" />
                     <div className="z-50 absolute left-0 top-0 w-10 h-8 opacity-0 hover:opacity-100 duration-300">
                         <IconSmall label={t('logout')} name="ri-logout-circle-line" onClick={() => {
                             removeCookie("token")
@@ -273,7 +273,7 @@ function UserAvatar({ className, profile, onClose }: { className?: string, profi
                 </div>
             </> : <>
                 <button onClick={() => setIsOpened(true)} title={label} aria-label={label}
-                    className="flex rounded-full border dark:border-neutral-600 px-2 bg-w aspect-[1] items-center justify-center t-primary bg-button">
+                    className="ios-icon-button">
                     <i className="ri-user-received-line"></i>
                 </button>
             </>}
