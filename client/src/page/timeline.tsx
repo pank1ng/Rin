@@ -27,15 +27,11 @@ export function TimelinePage() {
             if (data && typeof data !== 'string') {
                 const arr = Array.isArray(data) ? data : []
                 setLength(arr.length)
-                // 兼容的分组逻辑
-                const groups = (Object.groupBy
-                    ? Object.groupBy(arr, ({ createdAt }) => new Date(createdAt).getFullYear())
-                    : arr.reduce<Record<number, FeedItem[]>>((acc, item) => {
-                        const key = new Date(item.createdAt).getFullYear()
-                        ;(acc[key] ||= []).push(item)
-                        return acc
-                    }, {})
-                )
+                const groups = arr.reduce<Record<number, FeedItem[]>>((acc, item) => {
+                    const key = new Date(item.createdAt).getFullYear()
+                    ;(acc[key] ||= []).push(item)
+                    return acc
+                }, {})
 
                 setFeeds(groups)
             }
