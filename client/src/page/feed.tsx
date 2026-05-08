@@ -17,6 +17,7 @@ import {timeago} from "../utils/timeago";
 import {Button} from "../components/button";
 import {Tips} from "../components/tips";
 import {useLoginModal} from "../hooks/useLoginModal";
+import { useLiquidSurface } from "../hooks/useLiquidSurface";
 import mermaid from "mermaid";
 import {AdjacentSection} from "../components/adjacent_feed.tsx";
 
@@ -55,6 +56,7 @@ export function FeedPage({ id, TOC, clean }: { id: string, TOC: () => JSX.Elemen
   const [top, setTop] = useState<number>(0);
   const config = useContext(ClientConfigContext);
   const counterEnabled = config.get<boolean>('counter.enabled');
+  const liquidArticle = useLiquidSurface();
   function deleteFeed() {
     // Confirm
     showConfirm(
@@ -205,8 +207,9 @@ export function FeedPage({ id, TOC, clean }: { id: string, TOC: () => JSX.Elemen
             <div className="xl:w-64" />
             <main className="wauto">
               <article
-                className="glass-card m-2 px-6 py-6 md:px-8 md:py-8"
+                className="glass-card liquid-surface m-2 px-6 py-6 md:px-8 md:py-8"
                 aria-label={feed.title ?? "Unnamed"}
+                {...liquidArticle}
               >
                 <div className="flex justify-between gap-6">
                   <div>

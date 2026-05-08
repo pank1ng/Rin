@@ -101,7 +101,7 @@ export function FeedsPage() {
                         </div>
                     </div>
                     <Waiting for={status === 'idle'}>
-                        <div className="wauto flex flex-col ani-show">
+                        <div className="wauto flex flex-col ani-show liquid-stack">
                             {feeds[listState].data.map(({ id, ...feed }: any) => (
                                 <FeedCard key={id} id={id} {...feed} />
                             ))}

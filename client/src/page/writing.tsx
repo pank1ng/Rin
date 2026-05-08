@@ -4,6 +4,7 @@ import {Calendar} from 'primereact/calendar';
 import 'primereact/resources/primereact.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import {useCallback, useEffect, useState} from "react";
+import type React from "react";
 import {Helmet} from "react-helmet";
 import {useTranslation} from "react-i18next";
 import Loading from 'react-loading';
@@ -15,6 +16,7 @@ import {Cache} from '../utils/cache';
 import {siteName} from "../utils/constants";
 import mermaid from 'mermaid';
 import { MarkdownEditor } from '../components/markdown_editor';
+import { useLiquidSurface } from '../hooks/useLiquidSurface';
 
 async function publish({
   title,
@@ -137,6 +139,8 @@ export function WritingPage({ id }: { id?: number }) {
   const [createdAt, setCreatedAt] = useState<Date | undefined>(new Date());
   const [publishing, setPublishing] = useState(false)
   const { showAlert, AlertUI } = useAlert()
+  const liquidEditor = useLiquidSurface();
+  const liquidMeta = useLiquidSurface();
   function publishButton() {
     if (publishing) return;
     const tagsplit =
@@ -235,10 +239,16 @@ export function WritingPage({ id }: { id?: number }) {
   useEffect(() => {
     debouncedUpdate();
   }, [content, debouncedUpdate]);
-  function MetaInput({ className }: { className?: string }) {
+  function MetaInput({
+    className,
+    surfaceProps,
+  }: {
+    className?: string;
+    surfaceProps?: React.HTMLAttributes<HTMLDivElement>;
+  }) {
     return (
       <>
-        <div className={className}>
+        <div className={className} {...surfaceProps}>
           <Input
             id={id}
             value={title}
@@ -313,7 +323,7 @@ export function WritingPage({ id }: { id?: number }) {
       </Helmet>
       <div className="grid grid-cols-1 md:grid-cols-3 t-primary mt-4 gap-y-4">
         <div className="col-span-2 pb-8">
-          <div className="glass-card p-4 md:p-5">
+          <div className="glass-card liquid-surface p-4 md:p-5" {...liquidEditor}>
             {MetaInput({ className: "visible md:hidden mb-8" })}
             <MarkdownEditor content={content} setContent={setContent} height='600px' />
           </div>
@@ -332,7 +342,7 @@ export function WritingPage({ id }: { id?: number }) {
           </div>
         </div>
         <div className="hidden md:visible max-w-96 md:flex flex-col">
-          {MetaInput({ className: "glass-card p-5 mx-8" })}
+          {MetaInput({ className: "glass-card liquid-surface p-5 mx-8", surfaceProps: liquidMeta })}
           <div className="flex flex-row justify-center mt-8">
             <button
               onClick={publishButton}

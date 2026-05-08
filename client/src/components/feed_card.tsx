@@ -3,6 +3,7 @@ import {useTranslation} from "react-i18next";
 import {timeago} from "../utils/timeago";
 import {HashTag} from "./hashtag";
 import {useMemo} from "react";
+import { useLiquidSurface } from "../hooks/useLiquidSurface";
 
 export function FeedCard({ id, title, avatar, draft, listed, top, summary, hashtags, createdAt, updatedAt }:
     {
@@ -13,9 +14,15 @@ export function FeedCard({ id, title, avatar, draft, listed, top, summary, hasht
         createdAt: Date, updatedAt: Date
     }) {
     const { t } = useTranslation()
+    const liquid = useLiquidSurface()
     return useMemo(() => (
         <>
-            <Link href={`/feed/${id}`} target="_blank" className="w-full glass-card my-3 p-6 md:p-7 duration-300 bg-button block">
+            <Link
+                href={`/feed/${id}`}
+                target="_blank"
+                className="w-full glass-card liquid-surface my-3 p-6 md:p-7 duration-300 bg-button block"
+                {...liquid}
+            >
                 {avatar &&
                     <div className="flex flex-row items-center mb-5 rounded-[24px] overflow-clip">
                         <img src={avatar} alt=""
@@ -55,5 +62,5 @@ export function FeedCard({ id, title, avatar, draft, listed, top, summary, hasht
 
             </Link>
         </>
-    ), [id, title, avatar, draft, listed, top, summary, hashtags, createdAt, updatedAt])
+    ), [id, title, avatar, draft, listed, top, summary, hashtags, createdAt, updatedAt, liquid])
 }
