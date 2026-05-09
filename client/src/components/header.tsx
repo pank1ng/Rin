@@ -11,7 +11,6 @@ import { IconSmall } from "./icon";
 import { Input } from "./input";
 import { Padding } from "./padding";
 import { ClientConfigContext } from "../state/config";
-import { useLiquidSurface } from "../hooks/useLiquidSurface";
 
 
 export function Header({ children }: { children?: React.ReactNode }) {
@@ -39,7 +38,7 @@ export function Header({ children }: { children?: React.ReactNode }) {
                             <div
                                 className="w-full md:w-max transition-all duration-500 md:absolute md:left-1/2 md:translate-x-[-50%] flex-row justify-center items-center">
                                 <div
-                                    className="flex flex-row items-center glass-nav dock-shell t-primary px-2 py-1">
+                                    className="flex flex-row items-center glass-nav t-primary px-2 py-1">
                                     <Link aria-label={t('home')} href="/"
                                         className="visible opacity-100 md:hidden md:opacity-0 duration-300 mr-auto flex flex-row items-center py-2 px-2">
                                         <img src={process.env.AVATAR} alt="Avatar"
@@ -53,14 +52,12 @@ export function Header({ children }: { children?: React.ReactNode }) {
                                             </p>
                                         </div>
                                     </Link>
-                                    <div className="dock-row">
-                                        <NavBar menu={false} />
-                                    </div>
+                                    <NavBar menu={false} />
                                     {children}
                                     <Menu />
                                 </div>
                             </div>
-                            <div className="ml-auto hidden opacity-0 md:opacity-100 duration-300 md:flex flex-row items-center space-x-2 dock-row">
+                            <div className="ml-auto hidden opacity-0 md:opacity-100 duration-300 md:flex flex-row items-center space-x-2">
                                 <SearchButton />
                                 <LanguageSwitch />
                                 <UserAvatar profile={profile} />
@@ -82,15 +79,13 @@ function NavItem({ menu, title, selected, href, when = true, onClick }: {
     when?: boolean,
     onClick?: () => void
 }) {
-    const liquid = useLiquidSurface();
     return (
         <>
             {when &&
                 <Link href={href}
-                    className={`${menu ? "" : "hidden"} md:block cursor-pointer duration-300 px-3 py-2.5 md:py-3 text-sm rounded-full liquid-surface dock-item ${selected ? "dock-item-active text-white" : "t-primary hover:bg-secondary"}`}
+                    className={`${menu ? "" : "hidden"} md:block cursor-pointer duration-300 px-3 py-2.5 md:py-3 text-sm rounded-full ${selected ? "bg-theme text-white shadow-[0_10px_26px_rgba(10,132,255,0.28)]" : "t-primary hover:bg-secondary"}`}
                     state={{ animate: true }}
                     onClick={onClick}
-                    {...liquid}
                 >
                     {title}
                 </Link>}
@@ -113,7 +108,7 @@ function Menu() {
                 arrow={false}
                 trigger={<div>
                     <button onClick={() => setOpen(true)}
-                        className="ios-icon-button dock-icon">
+                        className="ios-icon-button">
                         <i className="ri-menu-line ri-lg" />
                     </button>
                 </div>
@@ -175,7 +170,7 @@ function LanguageSwitch({ className }: { className?: string }) {
         <div className={className + " flex flex-row items-center"}>
             <Popup trigger={
                 <button title={label} aria-label={label}
-                    className="ios-icon-button dock-icon">
+                    className="ios-icon-button">
                     <i className="ri-translate-2"></i>
                 </button>
             }
@@ -216,7 +211,7 @@ function SearchButton({ className, onClose }: { className?: string, onClose?: ()
     }
     return (<div className={className + " flex flex-row items-center"}>
         <button onClick={() => setIsOpened(true)} title={label} aria-label={label}
-            className="ios-icon-button dock-icon">
+            className="ios-icon-button">
             <i className="ri-search-line"></i>
         </button>
         <ReactModal
@@ -278,7 +273,7 @@ function UserAvatar({ className, profile, onClose }: { className?: string, profi
                 </div>
             </> : <>
                 <button onClick={() => setIsOpened(true)} title={label} aria-label={label}
-                    className="ios-icon-button dock-icon">
+                    className="ios-icon-button">
                     <i className="ri-user-received-line"></i>
                 </button>
             </>}

@@ -9,6 +9,7 @@ import { headersWithAuth } from "../utils/auth"
 import { siteName } from "../utils/constants"
 import { tryInt } from "../utils/int"
 import { useTranslation } from "react-i18next";
+import { usePageBodyClass } from "../hooks/usePageBodyClass";
 
 type FeedsData = {
     size: number,
@@ -24,6 +25,7 @@ type FeedsMap = {
 
 export function FeedsPage() {
     const { t } = useTranslation()
+    usePageBodyClass("liquid-page")
     const query = new URLSearchParams(useSearch());
     const profile = useContext(ProfileContext);
     const [listState, _setListState] = useState<FeedType>(query.get("type") as FeedType || 'normal')

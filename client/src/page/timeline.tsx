@@ -6,7 +6,6 @@ import {client} from "../main"
 import {headersWithAuth} from "../utils/auth"
 import {siteName} from "../utils/constants"
 import {useTranslation} from "react-i18next";
-import { useLiquidSurface } from "../hooks/useLiquidSurface";
 
 interface FeedItem {
     id: number;
@@ -81,7 +80,7 @@ export function TimelinePage() {
                                     {t('article.total_short$count', { count: feeds[+year]?.length })}
                                     </span>
                             </h1>
-                            <div className="w-full flex flex-col justify-center items-start my-4 liquid-stack">
+                            <div className="w-full flex flex-col justify-center items-start my-4">
                                 {feeds[+year]?.map(({ id, title, createdAt }) => (
                                     <FeedItem key={id} id={id.toString()} title={title || t('unlisted')}
                                               createdAt={new Date(createdAt)}/>
@@ -97,15 +96,13 @@ export function TimelinePage() {
 
 export function FeedItem({ id, title, createdAt }: { id: string, title: string, createdAt: Date }) {
     const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit' });
-    const liquid = useLiquidSurface();
     return (
         <div className="flex flex-row pl-2">
             <div className="flex flex-row items-center">
                 <div className="w-2.5 h-2.5 bg-theme rounded-full shadow-[0_0_18px_rgba(10,132,255,0.48)]"></div>
             </div>
             <div
-                className="flex-1 rounded-[20px] m-2 duration-300 flex flex-row items-center space-x-4 px-4 py-3 bg-secondary bg-button liquid-surface"
-                {...liquid}
+                className="flex-1 rounded-[20px] m-2 duration-300 flex flex-row items-center space-x-4 px-4 py-3 bg-secondary bg-button"
             >
                 <span className="t-secondary text-sm" title={new Date(createdAt).toLocaleString()}>
                     {formatter.format(new Date(createdAt))}

@@ -6,6 +6,7 @@ import { Waiting } from "../components/loading"
 import { client } from "../main"
 import { headersWithAuth } from "../utils/auth"
 import { siteName } from "../utils/constants"
+import { usePageBodyClass } from "../hooks/usePageBodyClass";
 
 type FeedsData = {
     name: string;
@@ -33,6 +34,7 @@ type FeedsData = {
 
 export function HashtagPage({ name }: { name: string }) {
     const { t } = useTranslation()
+    usePageBodyClass("liquid-page")
     const [status, setStatus] = useState<'loading' | 'idle'>('idle')
     const [hashtag, setHashtag] = useState<FeedsData>()
     const ref = useRef("")
@@ -65,18 +67,24 @@ export function HashtagPage({ name }: { name: string }) {
             </Helmet>
             <Waiting for={hashtag || status === 'idle'}>
                 <main className="w-full flex flex-col justify-center items-center mb-8">
-                    <div className="wauto text-start text-black dark:text-white py-4 text-4xl font-bold">
-                        <p>
-                            {hashtag?.name}
-                        </p>
-                        <div className="flex flex-row justify-between">
-                            <p className="text-sm mt-4 text-neutral-500 font-normal">
-                                {t('article.total$count', { count: hashtag?.feeds?.length })}
+                    <div className="wauto text-start py-6">
+                        <div className="glass-card liquid-surface px-6 py-7 md:px-8 md:py-8 overflow-hidden relative">
+                            <div className="pointer-events-none absolute inset-x-[12%] top-[-3.5rem] h-32 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.75),rgba(255,255,255,0))] opacity-70 blur-2xl dark:opacity-20"></div>
+                            <p className="ios-kicker mb-4">
+                                Tag View
                             </p>
+                            <p className="ios-title">
+                                {hashtag?.name}
+                            </p>
+                            <div className="flex flex-row justify-between mt-5">
+                                <p className="text-sm t-secondary font-normal">
+                                    {t('article.total$count', { count: hashtag?.feeds?.length })}
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <Waiting for={status === 'idle'}>
-                        <div className="wauto flex flex-col">
+                        <div className="wauto flex flex-col liquid-stack">
                             {hashtag?.feeds?.map(({ id, ...feed }: any) => (
                                 <FeedCard key={id} id={id} {...feed} />
                             ))}
