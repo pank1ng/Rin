@@ -25,14 +25,12 @@ import { Tips, TipsPage } from './components/tips.tsx'
 import { useTranslation } from 'react-i18next'
 import { MomentsPage } from './page/moments'
 import { ErrorPage } from './page/error.tsx'
-import { useLiquidAmbient } from './hooks/useLiquidAmbient.ts'
 
 function App() {
   const ref = useRef(false)
   const { t } = useTranslation()
   const [profile, setProfile] = useState<Profile | undefined>()
   const [config, setConfig] = useState<ConfigWrapper>(new ConfigWrapper({}, new Map()))
-  useLiquidAmbient()
   useEffect(() => {
     // --- 自动缩放逻辑开始 ---
     const HIGH_RES_THRESHOLD = 2560; // 定义高分屏阈值
