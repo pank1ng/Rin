@@ -78,26 +78,29 @@ export function FeedsPage() {
             <Waiting for={feeds.draft.size + feeds.normal.size + feeds.unlisted.size > 0 || status === 'idle'}>
                 <main className="w-full flex flex-col justify-center items-center mb-8">
                     <div className="wauto text-start py-6">
-                        <p className="ios-kicker mb-4">
-                            Rin Journal
-                        </p>
-                        <p className="ios-title">
-                            {listState === 'draft' ? t('draft_bin') : listState === 'normal' ? t('article.title') : t('unlisted')}
-                        </p>
-                        <div className="flex flex-row flex-wrap justify-between items-center gap-3 mt-5">
-                            <p className="text-sm t-secondary font-normal">
-                                {t('article.total$count', { count: feeds[listState]?.size })}
+                        <div className="glass-card liquid-surface px-6 py-7 md:px-8 md:py-8 overflow-hidden relative">
+                            <div className="pointer-events-none absolute inset-x-[12%] top-[-3.5rem] h-32 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.75),rgba(255,255,255,0))] opacity-70 blur-2xl dark:opacity-20"></div>
+                            <p className="ios-kicker mb-4">
+                                Rin Journal
                             </p>
-                            {profile?.permission &&
-                                <div className="flex flex-row flex-wrap gap-3">
-                                    <Link href={listState === 'draft' ? '/?type=normal' : '/?type=draft'} className={`ios-pill text-sm font-normal ${listState === 'draft' ? "bg-theme text-white" : ""}`}>
-                                        {t('draft_bin')}
-                                    </Link>
-                                    <Link href={listState === 'unlisted' ? '/?type=normal' : '/?type=unlisted'} className={`ios-pill text-sm font-normal ${listState === 'unlisted' ? "bg-theme text-white" : ""}`}>
-                                        {t('unlisted')}
-                                    </Link>
-                                </div>
-                            }
+                            <p className="ios-title">
+                                {listState === 'draft' ? t('draft_bin') : listState === 'normal' ? t('article.title') : t('unlisted')}
+                            </p>
+                            <div className="flex flex-row flex-wrap justify-between items-center gap-3 mt-5">
+                                <p className="text-sm t-secondary font-normal">
+                                    {t('article.total$count', { count: feeds[listState]?.size })}
+                                </p>
+                                {profile?.permission &&
+                                    <div className="flex flex-row flex-wrap gap-3">
+                                        <Link href={listState === 'draft' ? '/?type=normal' : '/?type=draft'} className={`ios-pill text-sm font-normal ${listState === 'draft' ? "bg-theme text-white" : ""}`}>
+                                            {t('draft_bin')}
+                                        </Link>
+                                        <Link href={listState === 'unlisted' ? '/?type=normal' : '/?type=unlisted'} className={`ios-pill text-sm font-normal ${listState === 'unlisted' ? "bg-theme text-white" : ""}`}>
+                                            {t('unlisted')}
+                                        </Link>
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                     <Waiting for={status === 'idle'}>
