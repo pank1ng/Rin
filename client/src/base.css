@@ -28,7 +28,7 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at var(--ambient-x) var(--ambient-y), rgba(255, 255, 255, 0.78), transparent 16%),
+    radial-gradient(circle at var(--ambient-x) var(--ambient-y), rgba(255, 255, 255, 0.72), transparent 12%),
     radial-gradient(circle at top left, rgba(79, 147, 255, 0.18), transparent 28%),
     radial-gradient(circle at top right, rgba(120, 189, 255, 0.16), transparent 24%),
     linear-gradient(180deg, #f5f8ff 0%, var(--rin-bg-light) 52%, #e8eef8 100%);
@@ -39,7 +39,7 @@ body {
 
 html[data-color-mode="dark"] body {
   background:
-    radial-gradient(circle at var(--ambient-x) var(--ambient-y), rgba(255, 255, 255, 0.14), transparent 16%),
+    radial-gradient(circle at var(--ambient-x) var(--ambient-y), rgba(255, 255, 255, 0.12), transparent 12%),
     radial-gradient(circle at top left, rgba(10, 132, 255, 0.18), transparent 25%),
     radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 22%),
     linear-gradient(180deg, #09111f 0%, #0d1526 42%, #070d19 100%);
@@ -339,11 +339,11 @@ html[data-color-mode="dark"] body::after {
       opacity: calc(var(--liquid-active) * 0.95);
       background:
         radial-gradient(
-          14rem 14rem at var(--mx) var(--my),
+          10rem 10rem at var(--mx) var(--my),
           rgba(255, 255, 255, 0.34),
           rgba(255, 255, 255, 0.16) 32%,
           rgba(10, 132, 255, 0.12) 52%,
-          transparent 74%
+          transparent 68%
         );
       mix-blend-mode: screen;
       transform: scale(1.02);
@@ -361,11 +361,11 @@ html[data-color-mode="dark"] body::after {
     html[data-color-mode="dark"] .liquid-surface::before {
       background:
         radial-gradient(
-          14rem 14rem at var(--mx) var(--my),
+          10rem 10rem at var(--mx) var(--my),
           rgba(255, 255, 255, 0.22),
           rgba(76, 175, 255, 0.16) 34%,
           rgba(56, 189, 248, 0.12) 54%,
-          transparent 74%
+          transparent 68%
         );
     }
 
